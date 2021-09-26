@@ -1,0 +1,77 @@
+<head>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/employerprofile.css' %}">
+</head>
+<div class="dv1">
+    {% if employer.profilepic %}
+    <div class="dv2">
+        <img src="{{ employer.profilepic.url }}" width='180em'>
+    </div>
+    {% endif %}
+    <div class="dv3">
+        <h1 class="top">Welcome, {{ employer.user.first_name }}</h1>
+        <h2 class="top">{{ employer.designation }}, {{ employer.organization }}</h2>
+        <div class = "dv3in">
+            <h3 class="basic">Name: {{ employer.user.first_name }} {{ employer.user.last_name }}</h3>
+            {% if employer.user.email %}
+            <h3 class="basic">Email: {{ employer.user.email }}</h3>
+            {% endif %}
+            {% if employer.phone %}
+            <h3 class="basic">Phone: {{ employer.phone }}</h3>
+            {% endif %}
+            {% if employer.linkedin %}
+            <h3 class="basic">Linkedin: {{ employer.linkedin }} </h3>
+            {% endif %}
+        </div>
+        <div style="display:flex; align-items:center; justify-content: center;">
+        <form method="POST" action="{% url 'logoutuser' %}">
+            {% csrf_token %}
+            <button class="btn" type="submit">Logout</button>
+        </form>
+        <form method="GET" action="{% url 'editemployer' employer.id %}">
+            {% csrf_token %}
+            <button class="btn" type="submit">Edit Profile</button>
+        </form>
+        </div>
+        <a href="{% url 'createjob' %}" >Create New Job</a>
+    </div>
+    <div class="dv4">
+        <h2 class="all">Your Jobs - {{ jobs|length }}</h2>
+        <hr>
+        {% for job in jobs %}
+        <div>
+            <h3 class="all">{{ job.title }}</h3>
+            <b class="all">{{ job.location }}</b>
+            <br>
+            <p class="all">{{ job.job_type }},
+            {{ job.operation_type }} </p>
+            <p class="all">Salary: Rs. {{ job.salary_in_LPA }} L.P.A </p>
+            <a href="{% url 'jobdetail' job.id %}">View Job</a>
+            <br>
+            <br>
+        </div>
+        {% endfor %}
+        <h2 class="all">Applications recieved - {{ applications|length }}</h2>
+        <hr>
+        {% for application in applications %}
+        <div>
+        <h3 class="all">{{ application.job.title }}</h3>
+        <b class="all">Applied by: </b><a href="{% url 'applicantdetails' application.id %}">{{ application.jobseeker.user.first_name }} {{ application.jobseeker.user.last_name }}</a>
+        <br>
+        <b class="all">Applied on: </b><p class="all">{{ application.appliedon }}</p>
+        <br>
+        <b class="all">Status: </b><p class="all">{{ application.status }}</p>
+        <div style="display:flex;">
+        <form method="POST" action="{% url 'applicationaccept' application.id %}">
+            {% csrf_token %}
+            <button class="btn" type="submit">Accept</button>
+        </form>
+        <form method="POST" action="{% url 'applicationreject' application.id %}">
+            {% csrf_token %}
+            <button class="btn" type="submit">Reject</button>
+        </form>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

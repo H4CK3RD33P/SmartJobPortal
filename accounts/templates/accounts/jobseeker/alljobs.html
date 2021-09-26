@@ -1,0 +1,26 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/alljobs.css' %}">
+</head>
+<div id="bg">
+    {% for message in messages %}
+        <div class="error">
+            <b>ERROR! {{ message }}</b>
+        </div>
+    {% endfor %}
+
+    {% for job in jobs %}
+    <div class="glass">
+        <h3 class="job">{{ job.title }}, {{ job.employer.organization }}</h3>
+        <b class="job">{{ job.location }}</b>
+        <br>
+        <div class="glassin">
+            {{ job.job_type }},
+            {{ job.operation_type }} 
+            <br>
+            Salary: Rs. {{ job.salary_in_LPA }} L.P.A
+        </div>
+        <a href="{% url 'jobdetail' job.id %}">View Job</a>
+    </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,55 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.error{
+    text-align: left;
+    color: red;
+}
+
+#bg{
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(hands.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position:absolute;
+    padding: 30px 30px 30px 30px;
+}
+
+.glass
+{
+    width: 500px;
+	background-color: rgba(32, 29, 29, 0.5);
+	margin: 0 auto;
+	color: white;
+	padding: 30px 30px 30px 30px;
+	text-align: left;
+	border-radius: 12px;
+    margin-bottom: 15px;
+    font-size:110%;
+    
+}
+
+a{
+    color: red;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(#fc00ff, #00dbde);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glassin{
+    margin: 8px 0px 8px 0px;
+    font-style: italic;
+    background: -webkit-linear-gradient(#ff8235, #30e8bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.job{
+    background: -webkit-linear-gradient(#ff4e50, #f9d423);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

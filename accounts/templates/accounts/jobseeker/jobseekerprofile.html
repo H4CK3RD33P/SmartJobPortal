@@ -1,0 +1,95 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/jobseekerprofile.css' %}">
+</head>
+<div id="bg">
+    <div class="glass">
+        <div class="dv2">
+            {% if jobseeker.profilepic %}
+                <img src="{{ jobseeker.profilepic.url }}" width='180em'>
+            {% endif %}
+            <h1 id='title'>Welcome, {{ jobseeker.user.first_name }}</h1>
+            <div class="basic">
+                <h3>Name: {{ jobseeker.user.first_name }} {{ jobseeker.user.last_name }}</h3>
+                {% if jobseeker.user.email %}
+                <h3>Email: {{ jobseeker.user.email }}</h3>
+                {% endif %}
+                {% if jobseeker.phone %}
+                <h3>Phone: {{ jobseeker.phone }}</h3>
+                {% endif %}
+                {% if jobseeker.email %}
+                <h3>Email: {{ jobseeker.email }}</h3>
+                {% endif %}
+                {% if jobseeker.linkedin %}
+                <h3>Linkedin: {{ jobseeker.linkedin }} </h3>
+                {% endif %}
+            </div>
+            {% if jobseeker.resume %}
+            <a href="{{ jobseeker.resume.url }}">View Resume</a>
+            {% endif %} 
+    
+            <br>
+            <div style="display:flex; align-items:center; justify-content: center;">
+            <form method="POST" action="{% url 'logoutuser' %}">
+                {% csrf_token %}
+                <button class="btn" type="submit">Logout</button>
+            </form>
+            <form method="GET" action="{% url 'editjobseeker' jobseeker.id %}">
+                {% csrf_token %}
+                <button class="btn" type="submit">Edit Profile</button>
+            </form>
+            </div>
+            <a href="{% url 'alljobs' %}">Explore Jobs</a>
+        </div>
+        <div class="imp">
+            <div class="subhead colored"><h2>Applied Jobs</h2></div>
+            <hr>
+            {% for application in appliedapplications %}
+            <div class="appliedsaved">
+                <div class="appliedsavedinner colored">
+                    <b class="jobhead colored">{{ application.job.title }}, {{ application.employer.organization }}</b>
+                    <br>
+                    <i>
+                    <b>Applied On: </b>
+                    {{ application.appliedon }}
+                    <br>
+                    <b>Status: </b>
+                    {{ application.status }}
+                    </i>
+                </div>
+                <form method="POST" action="{% url 'applicationdelete' application.id %}">
+                    {% csrf_token %}
+                    <button class="btn" type="submit">Revert Application</button>
+                </form>
+                <br>
+            </div>
+            {% endfor %}
+
+            <div class="subhead colored"><h2>Saved Jobs</h2></div>
+            <hr>
+            {% for application in savedapplications %}
+            <div class="appliedsaved">
+                <div class="appliedsavedinner colored">
+                    <b class="jobhead">{{ application.job.title }}, {{ application.employer.organization }}</b>
+                    <br>
+                    <i>
+                    <b>Saved On: </b>
+                    {{ application.appliedon }}
+                    </i>
+                </div>
+                <div style="display:flex;">
+                <form method="POST" action="{% url 'applicationdelete' application.id %}">
+                    {% csrf_token %}
+                    <button class="btn" type="submit">Delete Application</button>
+                </form>
+                <form method="POST"  action="{% url 'jobapply' application.job.id %}">
+                {% csrf_token %}
+                <button type='submit' class="btn">Apply Now</button>
+                </form>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

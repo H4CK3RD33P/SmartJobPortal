@@ -1,0 +1,51 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/jobdetail.css' %}">
+</head>
+
+<body>
+    <div class="re">
+        <div class="re1">
+            <h1 class="all" id="title">{{ job.title }}</h1>
+            <h2 class="all" id="org">{{ job.employer.organization }}</h2>
+            <h4 class="all">{{ job.location }}</h4>
+            <h3 class="all">{{ job.job_type }}, {{ job.operation_type }}</h3>
+            <h5 class="all">Responsibilities:</h5>
+            <p class="all">{{ job.responsibilities | safe }}</p>
+            <h5 class="all">Eligibility:</h5>
+            <p class="all">{{ job.eligibility | safe }}</p>
+            <h5 class="all">Preferred Qualification:</h5>
+            <P class="all">{{ job.preferred | safe }}</P>
+            <h5 class="all">Salary per annum (Rs.):{{ job.salary_in_LPA }} Lakh</h5>
+            <h5 class="all">Working Duration(hours):{{ job.duration_per_day }}hrs/day</h5>
+            <h5 class="all"><a href="{{ brochureurl }}">View Brochure</a></h5>
+            {% if accounttype == "employer" %}
+            <div style="display:flex; align-items:center; justify-content: center;">
+            <form method="POST" action="{% url 'jobdelete' job.id %}">
+                {% csrf_token %}
+                <button type='submit' class="btn">Delete Job</button>
+            </form>
+            <form method="GET" action="{% url 'jobedit' job.id %}">
+                {% csrf_token %}
+                <button type='submit' class="btn">Edit Job</button>
+            </form>
+            </div>
+            <a href="{% url 'employerprofile' %}">Go to your profile</a>
+            {% elif accounttype == "jobseeker" %}
+            <div style="display:flex; align-items:center; justify-content: center;">
+            <form method="POST" action="{% url 'jobapply' job.id %}">
+                {% csrf_token %}
+                <button type='submit' class="btn">Apply Now</button>
+            </form>
+            <form method="POST" action="{% url 'jobsave' job.id %}">
+                {% csrf_token %}
+                <button type='submit' class="btn">Save</button>
+            </form>
+            </div>
+            <a href="{% url 'jobseekerprofile' %}">Go to your profile</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

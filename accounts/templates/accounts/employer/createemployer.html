@@ -1,0 +1,76 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/createemployer.css' %}">
+</head>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="dv3">
+        <div class="top">
+            <h1>Employer Registation</h1>
+        </div>
+        <div class="main">
+            <form class="fm">
+                <div class="field_style">
+                    <label for="First_name"><b>{{ userform.first_name.label }}:</b></label>
+                    {{ userform.first_name }}
+                </div>
+                <div class="field_style">
+                    <label for="last_name"><b>{{ userform.last_name.label }}:</b></label>
+                    {{ userform.last_name }}
+                </div>
+                <div class="field_style">
+                    <label for="email_address"><b>{{ userform.email.label }}:</b></label>
+
+                    {{ userform.email }}
+                </div>
+                <div class="field_style">
+                    <label for="User_name">{{ userform.username.label }}:</b></label>
+
+                    {{ userform.username }}
+                </div>
+                <div class="field_style">
+                    <label for="Password"><b>{{ userform.password1.label }}:</b></label>
+
+                    {{ userform.password1 }}
+                </div>
+                <div class="field_style">
+                    <label for="password_confirmation"><b>{{ userform.password2.label }}:</b></label>
+                    {{ userform.password2 }}
+                </div>
+
+                <div class="field_style">
+                    <label for="organization"><b>Organization:</b></label>
+                    {{ employerform.organization }}
+                </div>
+
+                <div class="field_style">
+                    <label for="designation">Designation:</label>
+                    {{ employerform.designation }}
+                </div>
+
+
+                <div class="field_style">
+                    <label for="linkedin_url"><b>Linkedin url:</b></label>
+
+                    {{ employerform.linkedin }}
+                </div>
+                <div class="field_style">
+                    <label for="phone_number"><b>Phone Number:</b></label>
+
+                    {{ employerform.phone }}
+                </div>
+                <div class="field_style">
+                    <label for="picture"><b>Profile Picture:</b></label>
+                    {{ employerform.profilepic }}
+                </div>
+                <div class="submit_button">
+                    <button type="submit">submit</button>
+                </div>
+            </form>
+            {% for message in messages %}
+            <h4><b>{{ message }}</b></h4>
+            {% endfor %}
+        </div>
+    </div>
+</form>

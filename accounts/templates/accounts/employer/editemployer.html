@@ -1,0 +1,29 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/editemployer.css' %}">
+</head>
+<div id="bg">
+    <div class="glass">
+        <h1>Edit Profile</h1>
+        {% for message in messages %}
+        <h4 class="error"><b>{{ message }}</b></h4>
+        {% endfor %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in userform %}
+                <div class="label">{{ field.label }}:</div>
+                <div class="data">{{ field }}</div>
+                <br>
+            {% endfor %}
+            {% for field in employerform %}
+                <div class="label">{{ field.label }}:</div>
+                <div class="data">{{ field }}</div>
+                <br>
+            {% endfor %}
+            <button class="btn" type="submit">Save</button>
+        </form>
+        {% for message in messages %}
+        <h4 class="error"><b>{{ message }}</b></h4>
+        {% endfor %}
+    </div>
+</div>

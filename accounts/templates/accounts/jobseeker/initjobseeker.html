@@ -1,0 +1,19 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/initjobseeker.css' %}">
+</head>
+
+<div class="header2">
+    <div style="width: 800px; margin: 0 auto; display: flex; justify-content: center;">
+        <div class="dv1">
+            <h1 class="h1">Welcome to The Job-Portal</h1>
+            <div
+                style="width: 800px; margin: 0 auto; display: flex; justify-content: center; padding:20px 0px 20px 0px;">
+                <div class="button">
+                    <a href="{% url 'createjobseeker' %}" class="btn btn-one">New Jobseeker</a>
+                    <a href="{% url 'loginjobseeker' %}" class="btn btn-two">Existing Jobseeker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

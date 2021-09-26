@@ -1,0 +1,31 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/loginemployer.css' %}">
+</head>
+<form method="POST">
+    {% csrf_token %}
+    <div class="dv3">
+
+        <div class="top">
+            <h1>Employer Login</h1>
+        </div>
+        <div class="main">
+            <form class="fm">
+                <div class="field_style">
+                    <label for="First_name"><b>{{ authform.username.label }}:</b></label>
+                    {{ authform.username }}
+                </div>
+                <div class="field_style">
+                    <label for="last_name"><b>{{ authform.password.label }}:</b></label>
+                    {{ authform.password }}
+                </div>
+                {% for message in messages %}
+                    <div class='error'><h4><b>{{ message }}</b></h4></div>
+                {% endfor %}
+                <div class="submit_button">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+

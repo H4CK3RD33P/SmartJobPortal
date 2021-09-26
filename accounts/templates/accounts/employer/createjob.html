@@ -1,0 +1,18 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/createjob.css' %}">
+</head>
+<div id="bg">
+    <div class="glass">
+        <h1>Create Job</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in jobform %}
+                <div class="label">{{ field.label }}:</div>
+                <div class="data">{{ field }}</div>
+                <br>
+            {% endfor %}
+            <button class="btn" type="submit">Create</button>
+        </form>
+    </div>
+</div>

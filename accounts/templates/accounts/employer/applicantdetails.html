@@ -1,0 +1,42 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/applicantdetails.css' %}">
+</head>
+<div id='bg'>
+    <div class="glass">
+        <div id="basic">
+            {% if application.jobseeker.profilepic %}
+                <img src="{{ application.jobseeker.profilepic.url }}" width='180em'>
+            {% endif %}
+            <h1 id="name">{{ application.jobseeker.user.first_name }} {{ application.jobseeker.user.last_name }}</h1>
+            <div id="details">
+                {% if application.jobseeker.user.email %}
+                <b>Email: {{ application.jobseeker.user.email }}</b>
+                <br>
+                {% endif %}
+                {% if application.jobseeker.linkedin %}
+                <b>LinkedIn: {{ application.jobseeker.linkedin }}</b>
+                <br>
+                {% endif %}
+                {% if application.jobseeker.phone %}
+                <b>Phone: {{ application.jobseeker.phone }}</b>
+                {% endif %}
+                {% if application.jobseeker.resume %}
+                <a href="{{ application.jobseeker.resume }}">View Resume</a>
+                {% endif %}
+            </div>
+        </div>
+        <div id="job">
+            <div id="subhead"><h2>Jobs Applied for your organization: </h2></div>
+            <hr>
+            {% for application in all_applications %}
+            <div class="jobin">
+                <div class="title">{{ application.job.title }} </div>
+                <b>Applied on: </b>{{ application.appliedon }}
+                <br>
+                <b>Status: </b>{{ application.status }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
